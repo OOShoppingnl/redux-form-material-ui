@@ -63,12 +63,13 @@ describe('TextField', () => {
     )
   })
 
-  it('renders a TextField with a translated error', () => {
+  it('renders a TextField with a translated error and hintText', () => {
     expect(
       new ReduxFormMaterialUITextField({
         translator: m => `Translated: ${m}`,
         input: {
           name: 'myText',
+          hintText: 'fooHintText',
           value: 'Foo'
         },
         meta: {
@@ -81,6 +82,7 @@ describe('TextField', () => {
         name="myText"
         value="Foo"
         errorText="Translated: FooError"
+        hintText="Translated: fooHintText"
         ref="component"
       />
     )
