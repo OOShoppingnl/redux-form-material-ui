@@ -63,6 +63,29 @@ describe('TextField', () => {
     )
   })
 
+  it('renders a TextField with a translated error', () => {
+    expect(
+      new ReduxFormMaterialUITextField({
+        translator: m => `Translated: ${m}`,
+        input: {
+          name: 'myText',
+          value: 'Foo'
+        },
+        meta: {
+          error: 'FooError',
+          touched: true
+        }
+      }).render()
+    ).toEqualJSX(
+      <TextField
+        name="myText"
+        value="Foo"
+        errorText="Translated: FooError"
+        ref="component"
+      />
+    )
+  })
+
   it('renders a TextField with no warning when not touched', () => {
     expect(
       new ReduxFormMaterialUITextField({
