@@ -2,14 +2,17 @@ import TextField from 'material-ui/TextField'
 import createComponent from './createComponent'
 import mapError from './mapError'
 
+import { castArray } from 'lodash';
 
 const transProps = ["errorText", "floatingLabelText", "hintText"];
 
 const translate = (props, translator) => {
 
 	transProps.forEach(tp => {
-		if (props[tp])
-			props[tp] = translator(props[tp])
+
+		const prop = props[tp] && props[tp].toJS && typeof props[tp].toJS === 'function' ? props[tp].toJS() : props[tp];
+		if (props[tp]) 
+			props[tp] = translator(...castArray(prop));
 	})
 
 	return props
